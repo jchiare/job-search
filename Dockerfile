@@ -1,12 +1,12 @@
 FROM python:3.10
 
-WORKDIR /app
+WORKDIR /applications
 
-COPY ./requirements.txt /app/requirements.txt
+COPY ./requirements.txt /applications/requirements.txt
 
-RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /applications/requirements.txt
 
-COPY ./app /app
+COPY ./applications /applications
 
 EXPOSE 80 443
 
