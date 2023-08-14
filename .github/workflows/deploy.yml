@@ -1,0 +1,23 @@
+name: Deploy to Dokku
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Push to Dokku
+        uses: dokku/github-action@v3
+        with:
+          ssh-private-key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
+          ssh-host: dokku@159.69.179.2
+          ssh-keyscan: true
+          app-name: job-search
+          git-push-flags: --force
