@@ -11,10 +11,14 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Push to Dokku
         uses: dokku/github-action@v1.4.0
         with:
           ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
           git_remote_url: ssh://dokku@159.69.179.2:22/job-search
+          branch: main
+          git_push_flags: --force
