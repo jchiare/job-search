@@ -16,9 +16,5 @@ jobs:
       - name: Push to Dokku
         uses: dokku/github-action@v1.4.0
         with:
-          ssh-private-key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
+          ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
           git_remote_url: ssh://dokku@d159.69.179.2:22/job-search
-          ssh-host: dokku@159.69.179.2
-          ssh-keyscan: true
-          app-name: job-search
-          git-push-flags: --force
