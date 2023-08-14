@@ -17,4 +17,4 @@ jobs:
         uses: dokku/github-action@v1.4.0
         with:
           ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
-          git_remote_url: ssh://dokku@d159.69.179.2:22/job-search
+          git_remote_url: ssh://dokku@159.69.179.2:22/job-search
