@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html style="height:100%">
 <head>
     <title>Input Page</title>
 </head>
-<body>
-<form id="echoForm">
-    <input type="text" id="contentInput" placeholder="Enter something...">
-    <input type="submit" value="Echo">
-</form>
+<body style="display:flex; height: 100%; justify-content: center; flex-direction: column; align-items: center;">
+    <form id="echoForm" style="text-align: center; padding: 20px;">
+        <input 
+            type="text" 
+            autocomplete="off"
+            spellcheck="false" 
+            id="contentInput" 
+            placeholder="Enter something..."
+            style="padding: 10px; font-size: 1.2em; width: 400px; border-radius: 5px; border: 1px solid #ccc;"
+            autofocus
+        >
+    </form>
 <h2>You entered:</h2>
-<p id="output"></p>
+<h3 id="output"></h3>
 
 <script>
-    document.getElementById("echoForm").addEventListener("submit", async function(e) {
+    document.getElementById("echoForm").addEventListener("input", async function(e) {
         e.preventDefault();
         const contentInput = document.getElementById("contentInput");
         const response = await fetch("/echo/", {
