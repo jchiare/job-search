@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input Page</title>
+</head>
+<body>
+<form id="echoForm">
+    <input type="text" id="contentInput" placeholder="Enter something...">
+    <input type="submit" value="Echo">
+</form>
+<h2>You entered:</h2>
+<p id="output"></p>
+
+<script>
+    document.getElementById("echoForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const contentInput = document.getElementById("contentInput");
+        const response = await fetch("/echo/", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                'content': contentInput.value
+            })
+        });
+        const data = await response.json();
+        document.getElementById("output").textContent = data.content;
+    });
+</script>
+
+</body>
+</html>
