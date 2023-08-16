@@ -37,6 +37,7 @@ def data_analysis_matching_jobs(
     jobTitle: str = Form(...),
     salary: float = Form(...),
 ):
+    print(f"DA endpoint: {DATA_ANALYSIS_BASE_ENDPOINT}")
     response = requests.get(
         DATA_ANALYSIS_BASE_ENDPOINT
         + f"/matching-jobs?jobTitle={jobTitle}&salary={salary}"
