@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html style="height:100%">
+<head>
+    <title>Input Page</title>
+    <style>
+        .submit-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body style="display:flex; height: 100%; flex-direction: column; align-items: center;">
+    <h2>Job Search</h2>
+    <p style="font-size:1.5rem;">Searches the US government job board for similar jobs within your desired salary.</p>
+    <form id="echoForm" style="text-align: center; padding: 20px;">
+        
+        <label for="firstNameInput">Name:</label>
+        <input 
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            autofocus
+            required
+            id="firstNameInput"
+            style="padding: 10px; margin: 5px; font-size: 1.2em; width: 400px; border-radius: 5px; border: 1px solid #ccc;"
+        >
+        <br>
+
+
+        <label for="jobTitleInput">Job Title:</label>
+        <input 
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            required
+            id="jobTitleInput"
+            style="padding: 10px; margin: 5px; font-size: 1.2em; width: 400px; border-radius: 5px; border: 1px solid #ccc;"
+        >
+        <br>
+
+        <label for="salaryInput">Desired Salary:</label>
+        <input 
+            type="number"
+            autocomplete="off"
+            spellcheck="false"
+            required
+            id="salaryInput"
+            style="padding: 10px; margin: 5px; font-size: 1.2em; width: 400px; border-radius: 5px; border: 1px solid #ccc;"
+        >
+        <br>
+
+        <input type="submit" class="submit-button" value="Submit">
+
+    </form>
+<h2>You entered:</h2>
+<h3 id="output"></h3>
+
+<script>
+    document.getElementById("echoForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const firstNameInput = document.getElementById("firstNameInput");
+        const emailInput = document.getElementById("emailInput");
+        const jobTitleInput = document.getElementById("jobTitleInput");
+        const salaryInput = document.getElementById("salaryInput");
+
+        const combinedData = {
+            jobTitle: jobTitleInput.value,
+            salary: salaryInput.value
+        };
+
+        const response = await fetch("/matching-jobs/", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(combinedData)
+        });
+
+        const data = await response.json();
+        console.log(data)
+        document.getElementById("output").textContent = 
+            `First Name: ${firstNameInput.value}`;
+    });
+</script>
+
+</body>
+</html>

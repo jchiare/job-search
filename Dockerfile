@@ -7,5 +7,6 @@ COPY ./requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
 COPY ./applications /app
+COPY ./components /components
 
 EXPOSE 80 443
