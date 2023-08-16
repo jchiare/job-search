@@ -22,3 +22,4 @@ jobs:
           git_remote_url: ssh://dokku@159.69.179.2:22/job-search
           branch: main
           git_push_flags: --force
+          command: deploy
