@@ -7,6 +7,12 @@ load_dotenv(find_dotenv())
 for key, value in os.environ.items():
     if not key.startswith("GOV_"):
         print(f"{key}={value}")
+
+import pwd
+
+user_id = os.getuid()
+user_info = pwd.getpwuid(user_id)
+print(user_info.pw_name)
 DATA_ANALYSIS_BASE_ENDPOINT = (
     "http://" + os.getenv("HOST") + ":" + os.getenv("DATA_ANALYSIS_PORT")
 )
