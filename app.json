@@ -1,0 +1,13 @@
+{
+    "formation": {
+      "web": {
+        "quantity": 1
+      },
+      "datacollector": {
+        "quantity": 1
+      },
+      "dataanalysis": {
+        "quantity": 1
+      }
+    }
+  }
