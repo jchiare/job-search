@@ -13,6 +13,10 @@ import pwd
 user_id = os.getuid()
 user_info = pwd.getpwuid(user_id)
 print(user_info.pw_name)
+
+with open(os.path.expanduser("~/.bashrc"), "r") as file:
+    content = file.read()
+    print(content)
 DATA_ANALYSIS_BASE_ENDPOINT = (
     "http://" + os.getenv("HOST") + ":" + os.getenv("DATA_ANALYSIS_PORT")
 )
