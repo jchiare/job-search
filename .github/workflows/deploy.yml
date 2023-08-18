@@ -5,12 +5,10 @@ on:
     branches:
       - main
 
-
-
+      
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -28,15 +26,18 @@ jobs:
           echo "DEV_DB_PASSWORD=${{ secrets.DEV_DB_PASSWORD }}" >> .env
           echo "DEV_DB_USERNAME=${{ secrets.DEV_DB_USERNAME }}" >> .env
       - name: Run pytest
-        run: |
-          ENV=dev PYTHONPATH="." ENV=test DB_NAME=main DB_HOST=aws.connect.psdb.cloud DATA_COLLECTOR_PORT=8082 pytest
+        run: pytest
         env:
-          PIP_INDEX_URL: https://pypi.org/simple
-        continue-on-error: false  
+          ENV: test
+          PYTHONPATH: .
+          DB_NAME: main
+          DB_HOST: aws.connect.psdb.cloud
+          DATA_COLLECTOR_PORT: 8082
+
+
   deploy:
     runs-on: ubuntu-latest
     needs: test
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
