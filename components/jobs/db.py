@@ -1,8 +1,8 @@
 from typing import List
 from pydantic import BaseModel
-from sqlalchemy import String, and_, func
-from components.jobs.dto import ExternalJob
-from sqlalchemy.orm import Session, Mapped, mapped_column, declarative_base
+from sqlalchemy import String, and_, func, Column, Integer, String, Float
+from components.jobs.dto import ExternalJob, SearchResultItem
+from sqlalchemy.orm import Session, declarative_base
 
 Base = declarative_base()
 
@@ -10,10 +10,10 @@ Base = declarative_base()
 class Jobs(Base):
     __tablename__ = "jobs"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    title: Mapped[str] = mapped_column(String(255))
-    applyLink: Mapped[str] = mapped_column(String(255))
-    salary: Mapped[float]
+    id = Column(Integer, primary_key=True)
+    title = Column(String(255))
+    applyLink = Column(String(255))
+    salary = Column(Float)
 
 
 class JobEntry(BaseModel):
@@ -49,15 +49,23 @@ def get_matching_jobs_by_salary(
 
 
 def save_jobs_matching_title(db: Session, jobs_response: ExternalJob):
-    jobs_array = jobs_response["SearchResult"]["SearchResultItems"]
-    count = 0
-    for job in jobs_array:
+    jobs_search_results = jobs_response["SearchResult"]["SearchResultItems"]
+    jobs_array = parse_related_fields_from_api(jobs_search_results)
+
+    db.add_all(jobs_array)
+    db.commit()
+    print(f"Added {len(jobs_array)} jobs to DB")
+
+
+def parse_related_fields_from_api(
+    jobs_search_results: List[SearchResultItem],
+) -> List[Jobs]:
+    jobs = []
+    for job in jobs_search_results:
         job = job["MatchedObjectDescriptor"]
         title = job["PositionTitle"]
-        applyLink = job["ApplyURI"][0]
+        apply_link = job["ApplyURI"][0]
         salary = job["PositionRemuneration"][0]["MinimumRange"]
-        job_entry = Jobs(title=title, applyLink=applyLink, salary=salary)
-        db.add(job_entry)
-        count += 1
-    db.commit()
-    print(f"Added {count} jobs to DB")
+        job_entry = Jobs(title=title, applyLink=apply_link, salary=salary)
+        jobs.append(job_entry)
+    return jobs
