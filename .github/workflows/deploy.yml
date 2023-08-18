@@ -5,8 +5,10 @@ on:
     branches:
       - main
 
+
+
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,10 +26,18 @@ jobs:
           pip install -r requirements.txt
       - name: Run pytest
         run: |
-          ENV=dev pytest
+          ENV=dev PYTHONPATH="." pytest
         env:
           PIP_INDEX_URL: https://pypi.org/simple
         continue-on-error: false  
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Push to Dokku
         uses: dokku/github-action@v1.4.0
         with:
