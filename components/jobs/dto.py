@@ -132,7 +132,7 @@ class SearchResult(BaseModel):
     UserArea: UserArea1
 
 
-class ExternalJob(BaseModel):
+class GovernmentJobsApiResponse(BaseModel):
     LanguageCode: str
     SearchParameters: Dict[str, Any]
     SearchResult: SearchResult

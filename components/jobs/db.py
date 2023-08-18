@@ -1,7 +1,7 @@
 from typing import List
 from pydantic import BaseModel
 from sqlalchemy import String, and_, func, Column, Integer, String, Float
-from components.jobs.dto import ExternalJob, SearchResultItem
+from components.jobs.dto import GovernmentJobsApiResponse, SearchResultItem
 from sqlalchemy.orm import Session, declarative_base
 
 Base = declarative_base()
@@ -48,7 +48,7 @@ def get_matching_jobs_by_salary(
     return matching_jobs
 
 
-def save_jobs_matching_title(db: Session, jobs_response: ExternalJob):
+def save_jobs_matching_title(db: Session, jobs_response: GovernmentJobsApiResponse):
     jobs_search_results = jobs_response["SearchResult"]["SearchResultItems"]
     jobs_array = parse_related_fields_from_api(jobs_search_results)
 

@@ -1,8 +1,8 @@
 from fastapi.testclient import TestClient
 import pytest
 from sqlalchemy.orm import sessionmaker
-from components.database.db import create_db_engine
-from applications.data_analysis.main import app
+from components.database import create_db_engine
+from applications.data_analysis.app import app
 from components.jobs.db import Jobs
 
 

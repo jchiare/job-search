@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends, Query
 from components.jobs import external
 from components.jobs.db import save_jobs_matching_title
 from sqlalchemy.orm import Session
-from components.database.db import get_db
+from components.database import get_db
 
 app = FastAPI()
 
@@ -12,7 +12,7 @@ def find_jobs(
     jobTitle: str = Query(...),
     db: Session = Depends(get_db),
 ):
-    jobs = external.fetch_jobs(jobTitle)
+    jobs = external.fetch_jobs_from_gov(jobTitle)
     if jobs["SearchResult"]["SearchResultCountAll"] == 0:
         raise HTTPException(status_code=404, detail="No jobs found")
     save_jobs_matching_title(db, jobs)
@@ -25,4 +25,4 @@ if __name__ == "__main__":
 
     port = int(os.getenv("DATA_COLLECTOR_PORT"))
 
-    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
+    uvicorn.run("app:app", host="0.0.0.0", port=port, reload=True)

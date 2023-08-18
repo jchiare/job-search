@@ -1,4 +1,4 @@
-from components.database.db import get_db
+from components.database import get_db
 from fastapi import FastAPI, Query, Depends
 from sqlalchemy.orm import Session
 from components.jobs.db import get_matching_jobs_by_salary
@@ -28,4 +28,4 @@ if __name__ == "__main__":
     port = int(os.getenv("DATA_ANALYSIS_PORT"))
     host = os.getenv("HOST")
 
-    uvicorn.run("main:app", host=host, port=port, reload=True)
+    uvicorn.run("app:app", host=host, port=port, reload=True)
