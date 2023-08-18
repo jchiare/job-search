@@ -29,7 +29,7 @@ jobs:
           echo "DEV_DB_USERNAME=${{ secrets.DEV_DB_USERNAME }}" >> .env
       - name: Run pytest
         run: |
-          ENV=dev PYTHONPATH="." DB_NAME=main DB_HOST=aws.connect.psdb.cloud DATA_COLLECTOR_PORT=8082 pytest
+          ENV=dev PYTHONPATH="." ENV=test DB_NAME=main DB_HOST=aws.connect.psdb.cloud DATA_COLLECTOR_PORT=8082 pytest
         env:
           PIP_INDEX_URL: https://pypi.org/simple
         continue-on-error: false  
