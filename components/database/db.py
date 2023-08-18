@@ -15,15 +15,19 @@ def create_db_engine():
     load_environment_variables()
 
     host = os.getenv("DB_HOST")
-    user = os.getenv("DB_USERNAME")
-    passwd = os.getenv("DB_PASSWORD")
-    db = (
-        os.getenv("DB_NAME")
-        if os.getenv("PROD_DB") == "true"
-        else os.getenv("DEV_DB_NAME")
+    user = (
+        os.getenv("DB_USERNAME")
+        if os.getenv("ENV") == "prod"
+        else os.getenv("DEV_DB_USERNAME")
     )
+    passwd = (
+        os.getenv("DB_PASSWORD")
+        if os.getenv("ENV") == "prod"
+        else os.getenv("DEV_DB_PASSWORD")
+    )
+    db = os.getenv("DB_NAME")
     connection_string = f"mysql+mysqlconnector://{user}:{passwd}@{host}:3306/{db}"
-    engine = create_engine(connection_string, echo=True)
+    engine = create_engine(connection_string)
     return engine
 
 
