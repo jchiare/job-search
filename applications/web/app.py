@@ -6,7 +6,6 @@ from pathlib import Path
 import requests
 from dotenv import load_dotenv
 from prometheus_client import Counter, generate_latest
-from applications.monitoring.helper import prometheus_text_to_json
 
 load_dotenv()
 from components.constants import DATA_ANALYSIS_BASE_ENDPOINT
