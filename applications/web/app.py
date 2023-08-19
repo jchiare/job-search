@@ -22,6 +22,11 @@ async def read_root():
     return {"Hello": "World"}
 
 
+@app.get("/health")
+async def read_root():
+    return 200
+
+
 @app.get("/echo/")
 async def read_echo(request: Request, response_class=HTMLResponse):
     return templates.TemplateResponse("input_template.html", {"request": request})

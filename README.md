@@ -4,19 +4,6 @@ Web application with two backend services that fetch US government jobs, analysi
 
 ## CU - Boulder Class
 
-Answer to Week 2:
-
-- Unit test: `/tests/components/jobs/db_unit_test.py` -> test_parse_related_fields_from_api function
-- Integration test: `/tests/applications/data_analysis/main_integration_test.py` -> test_parse_related_fields_from_api function
-- CI/CD: `.github/workflows/deploy.yml`
-
-Answer to Week 3 - Data Collection: 
-
-- [x] Fetch Data from external source: Done in the data_collector app on the endpoint `save-jobs`, using the function `fetch_jobs_from_gov` from the file `components/jobs/external.py`
-- [x] Store data in the database: Saves jobs with matching title to a MySQL (cloud hosted on PlanetScale) database, using the function `save_jobs_matching_title` from the file `components/jobs/db.py`
-
-Note: This can be used 
-
 Answer to Week 3 - Data Collection: 
 
 - [x] Fetch Data from external source: Done in the data_collector app on the endpoint `save-jobs`, using the function `fetch_jobs_from_gov` from the file `components/jobs/external.py`. The data fetching is scheduled using cron in production.
@@ -28,6 +15,11 @@ Answer to Week 3 - Data Analysis:
 - [x] Perform analysis: Analysis of relevant jobs is performed on the same endpoint and same function as the above. We analyze jobs based on what the user wants in terms of salary and job title 
 - [x] Should be ran as a standalone process / server using the command `python applications/data_analysis/app.py`. Can also run a script using cron in production with command `python scripts/analyze_jobs.py` 
 
+Answer to Week 2:
+
+- Unit test: `/tests/components/jobs/db_unit_test.py` -> test_parse_related_fields_from_api function
+- Integration test: `/tests/applications/data_analysis/main_integration_test.py` -> test_parse_related_fields_from_api function
+- CI/CD: `.github/workflows/deploy.yml`
 
 ## Database details
 
