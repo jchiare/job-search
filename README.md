@@ -4,6 +4,11 @@ Web application with two backend services that fetch US government jobs, analysi
 
 ## CU - Boulder Class
 
+Answer to Week 4 - Monitoring: 
+
+- [x] `/health` endpoint that returns 200 ok is in `applications/web/app.py`
+- [x] `/metrics` endpoint uses the prometheus client library to return metrics (and a 200 HTTP status)
+
 Answer to Week 3 - Data Collection: 
 
 - [x] Fetch Data from external source: Done in the data_collector app on the endpoint `save-jobs`, using the function `fetch_jobs_from_gov` from the file `components/jobs/external.py`. The data fetching is scheduled using cron in production.

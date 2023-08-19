@@ -5,12 +5,16 @@ from fastapi.responses import HTMLResponse
 from pathlib import Path
 import requests
 from dotenv import load_dotenv
+from prometheus_client import Counter, generate_latest
+from applications.monitoring.helper import prometheus_text_to_json
 
 load_dotenv()
 from components.constants import DATA_ANALYSIS_BASE_ENDPOINT
 
 
 BASE_DIR = Path(__file__).resolve().parent
+REQUESTS = Counter("app_requests_total", "Total app HTTP requests.")
+
 
 app = FastAPI()
 
@@ -19,6 +23,7 @@ templates = Jinja2Templates(str(Path(BASE_DIR, "templates")))
 
 @app.get("/")
 async def read_root():
+    REQUESTS.inc()
     return {"Hello": "World"}
 
 
@@ -27,13 +32,20 @@ async def health():
     return 200
 
 
+@app.get("/metrics")
+async def metrics():
+    return generate_latest()
+
+
 @app.get("/echo/")
 async def read_echo(request: Request, response_class=HTMLResponse):
+    REQUESTS.inc()
     return templates.TemplateResponse("input_template.html", {"request": request})
 
 
 @app.get("/app/")
 async def read_app(request: Request, response_class=HTMLResponse):
+    REQUESTS.inc()
     return templates.TemplateResponse("app_template.html", {"request": request})
 
 
@@ -42,6 +54,7 @@ def data_analysis_matching_jobs(
     jobTitle: str = Form(...),
     salary: float = Form(...),
 ):
+    REQUESTS.inc()
     print(f"DA endpoint: {DATA_ANALYSIS_BASE_ENDPOINT}")
     response = requests.get(
         DATA_ANALYSIS_BASE_ENDPOINT
@@ -54,6 +67,7 @@ def data_analysis_matching_jobs(
 
 @app.post("/echo/")
 async def echo_item(content: str = Form(...)):
+    REQUESTS.inc()
     return {"content": content}
 
 
