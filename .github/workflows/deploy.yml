@@ -28,7 +28,7 @@ jobs:
       - name: Run pytest
         run: pytest
         env:
-          ENV: test
+          ENV: local
           PYTHONPATH: .
           DB_NAME: main
           DB_HOST: aws.connect.psdb.cloud

@@ -29,7 +29,7 @@ def get_matching_jobs_by_salary(
         db.query(Jobs)
         .filter(
             and_(
-                func.lower(Jobs.title) == desired_job_title.lower(),
+                func.lower(Jobs.title).ilike(f"%{desired_job_title.lower()}%"),
                 Jobs.salary >= desired_salary,
             )
         )

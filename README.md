@@ -69,7 +69,7 @@ Note: `PYTHONPATH` env var value needs to be `.`
 ## How to test
 
 1. Install dependencies
-2. Run `pytest`
+2. Run `ENV=local pytest`
 
 ## How to run servers
 
