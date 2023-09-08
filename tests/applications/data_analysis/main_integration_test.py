@@ -25,18 +25,24 @@ def test_matching_jobs(test_db):
     job1 = Jobs(title="Engineer", applyLink="http://test.com", salary=50000.0)
     job2 = Jobs(title="Engineer", applyLink="http://test2.com", salary=70000.0)
     job3 = Jobs(title="Doctor", applyLink="http://test3.com", salary=100000.0)
+    job4 = Jobs(title="Doctor", applyLink="http://test4.com", salary=50000.0)
     test_db.add(job1)
     test_db.add(job2)
     test_db.add(job3)
+    test_db.add(job4)
     test_db.commit()
 
     response = client.get(
-        "/matching-jobs", params={"jobTitle": "Engineer", "salary": 55000.0}
+        "/matching-jobs", params={"jobTitle": "doctor", "salary": 55000.0}
     )
 
     expected_response = {
         "matching_jobs": [
-            {"jobTitle": "Engineer", "applyLink": "http://test2.com", "salary": 70000.0}
+            {
+                "jobTitle": "Doctor",
+                "applyLink": "http://test3.com",
+                "salary": 100000.0,
+            }
         ]
     }
     assert response.status_code == 200

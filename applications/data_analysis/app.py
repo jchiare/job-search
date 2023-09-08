@@ -17,7 +17,6 @@ async def submit_info(
 ):
     matching_jobs = get_matching_jobs_by_salary(db, jobTitle, salary)
 
-    print(matching_jobs)
     return {"matching_jobs": matching_jobs}
 
 
