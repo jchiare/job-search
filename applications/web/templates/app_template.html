@@ -17,6 +17,10 @@
         .submit-button:hover {
             background-color: #45a049;
         }
+        table, th, td {
+            border: 1px solid black;
+            padding: 5px
+        }
     </style>
 </head>
 <body style="display:flex; height: 100%; flex-direction: column; align-items: center;">
@@ -62,8 +66,24 @@
         <input type="submit" class="submit-button" value="Submit">
 
     </form>
-<h2>You entered:</h2>
+<h2>Your name: </h2>
 <h3 id="output"></h3>
+
+<h2>Matching Jobs</h2>
+<div id="jobTableDiv">
+    <table id="jobTable">
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Apply Link</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody id="jobTableBody">
+
+        </tbody>
+    </table>
+</div>
 
 <script>
     document.getElementById("echoForm").addEventListener("submit", async function(e) {
@@ -87,10 +107,25 @@
             body: new URLSearchParams(combinedData)
         });
 
-        const data = await response.json();
-        console.log(data)
         document.getElementById("output").textContent = 
-            `First Name: ${firstNameInput.value}`;
+        `${firstNameInput.value}`;
+
+        const data = await response.json();
+        document.getElementById("jobTableBody").innerHTML = "";
+
+        console.log(data)
+
+        data.forEach(job => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${job.jobTitle}</td>
+                <td><a href="${job.applyLink}" target="_blank">Apply Here</a></td>
+                <td>$ ${job.salary}</td>
+            `;
+            document.getElementById("jobTableBody").appendChild(row);
+        });
+
+       
     });
 </script>
 

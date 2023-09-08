@@ -33,8 +33,6 @@ As a person who is looking for a job with the US government, I want to view all 
 - [x] Perform analysis: Analysis of relevant jobs is performed on the same endpoint and same function as the above. We analyze jobs based on what the user wants in terms of salary and job title 
 - [x] Should be ran as a standalone process / server using the command `python applications/data_analysis/app.py`. Can also run a script using cron in production with command `python scripts/analyze_jobs.py` 
 
-Answer to Week 2:
-
 ## Unit Test:
 - Unit test: `/tests/components/jobs/db_unit_test.py` -> test_parse_related_fields_from_api function (mock objects)
 
@@ -51,9 +49,6 @@ Answer to Week 2:
 
 * MySQL database using SQLalchemy as the ORM
 * Hosted in the cloud using [PlanetScale](https://planetscale.com)
-
-## CI/CD details
-
 
 
 ## Install dependencies
