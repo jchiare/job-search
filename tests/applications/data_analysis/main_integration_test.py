@@ -16,7 +16,7 @@ def test_db():
     db = SessionLocal()
     yield db
 
-    db.query(Jobs).delete()
+    db.query(Jobs).filter(Jobs.applyLink.like("http://test%")).delete()
     db.commit()
     db.close()
 
