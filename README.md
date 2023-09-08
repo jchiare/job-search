@@ -8,6 +8,31 @@ Note: The live application only works with the "engineer" job.
 
 As a person who is looking for a job with the US government, I want to view all related jobs which includes the application links, so I can easily apply to those jobs.  
 
+### Self grading with rubric:
+
+- [x] Web application basic form, reporting
+- [x] Data collection
+- [x] Data analyzer
+- [x] Unit tests
+- [x] Data persistence any data store
+- [x] Rest collaboration internal or API endpoint
+- [x] Product environment
+- [x] Integration tests
+- [x] Using mock objects or any test doubles
+- [x] Continuous integration
+- [x] Production monitoring instrumenting
+- [] Event collaboration messaging
+- [x] Continuous delivery
+
+## Live application testing instructions:
+
+1. Go to [https://job-search.speedyquick.club/app/](https://job-search.speedyquick.club/app/)
+2. Type a name (any name, like "john")
+3. Enter a job title .. currently limited to **engineer**
+4. Enter a desired salary - you'll only gets jobs >= to your input
+5. Press submit button and view the matching jobs
+
+.. I know it's not pretty!
 
 ## Web application, form, and reporting 
 - Basic HTML with some CSS and JavaScript sprinkled in.
