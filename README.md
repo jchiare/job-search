@@ -4,6 +4,11 @@ Web application with two backend services that fetch US government jobs, analysi
 
 Note: The live application only works with the "engineer" job.
 
+#### User Story
+
+As a person who is looking for a job with the US government, I want to view all related jobs which includes the application links, so I can easily apply to those jobs.  
+
+
 ## Web application, form, and reporting 
 - Basic HTML with some CSS and JavaScript sprinkled in.
 - Can view in `applications/web/templates/app_template.html`
@@ -58,6 +63,8 @@ Tested with Python `3.10.5`
 1. Start the virtual environment with `source env/bin/activate`
 2. Install requirements with `pip install -r requirements.txt`
 3. Get the environment variables (some are secret so won't be in zip)
+
+Note: `PYTHONPATH` env var value needs to be `.`
 
 ## How to test
 
